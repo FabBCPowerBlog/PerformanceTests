@@ -5,6 +5,7 @@ page 50140 "CAGPT_Test Templates"
     PageType = List;
     SourceTable = "CAGPT_Test Template";
     UsageCategory = Lists;
+    InsertAllowed = false;
 
     layout
     {
@@ -15,18 +16,16 @@ page 50140 "CAGPT_Test Templates"
                 field("Code"; Rec."Code")
                 {
                     ToolTip = 'Specifies the value of the Code field.';
+                    Editable = false;
                 }
-                field("Sales Document Type From"; Rec."Sales Document Type From")
+                field("Version"; Rec."Version")
                 {
-                    ToolTip = 'Specifies the value of the Code field.';
+                    ToolTip = 'Specifies the value of the Version field.';
+                    Editable = false;
                 }
-                field("From Document No."; Rec."From Document No.")
+                field(Quantity; Rec.Quantity)
                 {
-                    ToolTip = 'Specifies the value of the From Document No. field.';
-                }
-                field("Document Count"; Rec."Document Count")
-                {
-                    ToolTip = 'Specifies the value of the Document Count field.';
+                    ToolTip = 'Specifies the value of the Quantity field.';
                 }
             }
         }
@@ -36,6 +35,22 @@ page 50140 "CAGPT_Test Templates"
     {
         area(processing)
         {
+            action(CreateTest)
+            {
+                Caption = 'Create Test';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ApplicationArea = Basic, Suite;
+                Image = New;
+
+                trigger OnAction()
+                var
+                    TestLaunchMgt: Codeunit CAGPT_TestLaunchMgt;
+                begin
+                    TestLaunchMgt.CreateNewTestTemplate();
+                end;
+            }
             action(LaunchTest)
             {
                 Caption = 'Launch Tests';
@@ -52,10 +67,23 @@ page 50140 "CAGPT_Test Templates"
                     TestLaunchMgt.LaunchTest(Rec);
                 end;
             }
-
         }
         area(navigation)
         {
+            action(Parameters)
+            {
+                Caption = 'Parameters';
+                Promoted = true;
+                PromotedCategory = Process;
+                PromotedIsBig = true;
+                ApplicationArea = Basic, Suite;
+                Image = ValueLedger;
+
+                trigger OnAction()
+                begin
+                    Rec.ShowParameters();
+                end;
+            }
             action(OpenJobQueueEntries)
             {
                 Caption = 'Open Job Queue Entries';

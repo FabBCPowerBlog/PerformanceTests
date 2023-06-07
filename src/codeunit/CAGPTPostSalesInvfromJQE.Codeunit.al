@@ -3,22 +3,9 @@ codeunit 50145 "CAGPT_Post Sales Inv. from JQE"
     TableNo = "Job Queue Entry";
 
     trigger OnRun()
-    begin
-        PostSalesinvoice(Rec."Parameter String");
-    end;
-
-    procedure PostSalesinvoice(SalesDocNoFilter: Text)
     var
-        SalesHeader: Record "Sales Header";
-        SalesPost: Codeunit "Sales-Post";
+        SalesDocMgt: Codeunit "CAGPT_Sales Document Mgt";
     begin
-        Clear(SalesPost);
-        SalesHeader.Reset();
-        SalesHeader.SetRange("Document Type", SalesHeader."Document Type"::Invoice);
-        SalesHeader.SetFilter("No.", SalesDocNoFilter);
-        if SalesHeader.FindSet() then
-            repeat
-                SalesPost.Run(SalesHeader)
-            until SalesHeader.Next() = 0;
+        SalesDocMgt.PostSalesDocuments(Enum::"Sales Document Type"::Invoice, Rec."Parameter String");
     end;
 }

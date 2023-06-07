@@ -2,7 +2,7 @@
   "id": "f7370bb0-5629-4fb1-bb4b-fcb06e7a476e",
   "name": "Performance Tests",
   "publisher": "Default publisher",
-  "version": "1.0.0.0",
+  "version": "1.0.0.3",
   "brief": "",
   "description": "",
   "privacyStatement": "",
@@ -10,7 +10,14 @@
   "help": "",
   "url": "",
   "logo": "",
-  "dependencies": [],
+  "dependencies": [
+        {
+      "id": "a9abc87c-d066-433d-86db-1213107b7290",
+      "name": "Accounting Enhancements",
+      "publisher": "Calliope",
+      "version": "19.0.0.0"
+    }
+  ],
   "screenshots": [],
   "platform": "1.0.0.0",
   "application": "21.0.0.0",
